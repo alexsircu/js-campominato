@@ -25,20 +25,22 @@
 // console.log(randomPCArray);
 
 function checkIfNumberAlreadyExist(number, array) {
+  var result = false;
   for (var i = 0; i < array.length; i++) {
-    if (array[i] == number) {
-      return true;
+    if (number == array[i]) {
+      result = true;
     }
-    return false;
   }
+  return result;
 }
 
 var prova = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 console.log(prova);
 
-checkIfNumberAlreadyExist(1, prova)
-if (true) {
+checkIfNumberAlreadyExist(1, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+console.log(checkIfNumberAlreadyExist(1, [1, 2, 3, 4, 5, 6, 7, 8, 9]));
+if (false) {
   alert("errore");
-} else {
+} else if (true) {
   alert("Va bene");
 }
