@@ -7,25 +7,15 @@
 // La partita termina quando il giocatore inserisce un numero “vietato” o raggiunge il numero massimo possibile di numeri consentiti.
 // Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha inserito un numero consentito.
 
-// function randomFunction(min, max) {
-//   min = Math.ceil(min);
-//   max = Math.floor(max);
-//   return Math.floor(Math.random() * (max - min + 1)) + min;
-// }
-//
-// var randomPCArray = [];
-// for (var i = 1; i <= 16; i++) {
-//   var generatedNumbersPC = randomFunction(1, 100);
-//   randomPCArray.push(generatedNumbersPC);
-//   if (randomPCArray[i] === randomPCArray.includes()) {
-//     alert("errore");
-//   }
-// }
-//
-// console.log(randomPCArray);
+// FUNZIONI -----------------------------------------------
+function randomFunction(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 function checkIfNumberAlreadyExist(number, array) {
-  var result = false;
+  result = false;
   for (var i = 0; i < array.length; i++) {
     if (number == array[i]) {
       result = true;
@@ -33,14 +23,15 @@ function checkIfNumberAlreadyExist(number, array) {
   }
   return result;
 }
+// FUNZIONI -----------------------------------------------
 
-var prova = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-console.log(prova);
-
-checkIfNumberAlreadyExist(1, [1, 2, 3, 4, 5, 6, 7, 8, 9])
-console.log(checkIfNumberAlreadyExist(1, [1, 2, 3, 4, 5, 6, 7, 8, 9]));
-if (false) {
-  alert("errore");
-} else if (true) {
-  alert("Va bene");
+var randomPCArray = [];
+while (randomPCArray.length < 16) {
+  var generatedNumberPC = randomFunction(1, 100);
+  console.log(generatedNumberPC);
+  checkIfNumberAlreadyExist(generatedNumberPC, randomPCArray)
+  if (result == false) {
+    randomPCArray.push(generatedNumberPC);
+  }
 }
+console.log(randomPCArray);
