@@ -15,7 +15,7 @@ function randomFunction(min, max) {
 }
 
 function checkIfNumberAlreadyExist(number, array) {
-  result = false;
+  var result = false;
   for (var i = 0; i < array.length; i++) {
     if (number == array[i]) {
       result = true;
@@ -29,8 +29,8 @@ var randomPCArray = [];
 while (randomPCArray.length < 16) {
   var generatedNumberPC = randomFunction(1, 100);
   console.log(generatedNumberPC);
-  checkIfNumberAlreadyExist(generatedNumberPC, randomPCArray)
-  if (result == false) {
+  var duplicate = checkIfNumberAlreadyExist(generatedNumberPC, randomPCArray);
+  if (duplicate == false) {
     randomPCArray.push(generatedNumberPC);
   }
 }
