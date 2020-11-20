@@ -9,8 +9,6 @@
 
 // FUNZIONI -----------------------------------------------
 function randomFunction(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -25,6 +23,7 @@ function checkIfNumberAlreadyExist(number, array) {
 }
 // FUNZIONI -----------------------------------------------
 
+// generazione bombe
 var randomPCArray = [];
 while (randomPCArray.length < 16) {
   var generatedNumberPC = randomFunction(1, 100);
@@ -35,3 +34,32 @@ while (randomPCArray.length < 16) {
   }
 }
 console.log(randomPCArray);
+// fine generazione bombe
+
+// creazione gioco
+var maxAttempts = 100-16;
+var attempts = [];
+var score = 0;
+// gioco
+var lost = false;
+while ( attempts.length < maxAttempts && lost == false) {
+  var userNumber = parseInt(prompt("Inserisci un numero tra 1 e 100"));
+  console.log(userNumber);
+  var duplicateCheck = checkIfNumberAlreadyExist(userNumber, attempts);
+  console.log(duplicateCheck);
+
+  var gameCheck = checkIfNumberAlreadyExist(userNumber, randomPCArray);
+  console.log(gameCheck);
+  
+  if (gameCheck == true) {
+    alert("Hai perso");
+    lost = true;
+  } else if (duplicateCheck == false) {
+    attempts.push(userNumber);
+  }
+  score++;
+  console.log(score);
+}
+alert("Il tuo punteggio è: " + score);
+console.log(attempts);
+// fine gioco
