@@ -23,11 +23,25 @@ function checkIfNumberAlreadyExist(number, array) {
 }
 // FUNZIONI -----------------------------------------------
 
+// Scelta difficoltà del gioco "BONUS"
+var maxAttempts;
+var level;
+level = parseInt(prompt("Scegli la difficoltà tra 0, 1 o 2"));
+switch (level) {
+  case 2:
+  maxAttempts = 50;
+    break;
+  case 1:
+  maxAttempts = 80;
+    break;
+  default:
+  maxAttempts = 100;
+}
 // generazione bombe
 var randomPCArray = [];
 while (randomPCArray.length < 16) {
-  var generatedNumberPC = randomFunction(1, 100);
-  console.log(generatedNumberPC);
+  var generatedNumberPC = randomFunction(1, maxAttempts);
+  // console.log(generatedNumberPC);
   var duplicate = checkIfNumberAlreadyExist(generatedNumberPC, randomPCArray);
   if (duplicate == false) {
     randomPCArray.push(generatedNumberPC);
@@ -37,28 +51,28 @@ console.log(randomPCArray);
 // fine generazione bombe
 
 // creazione gioco
-var maxAttempts = 100-16;
+var availableAttempts = maxAttempts - 16;
 var attempts = [];
 var score = 0;
 // gioco
 var lost = false;
-while ( attempts.length < maxAttempts && lost == false) {
-  var userNumber = parseInt(prompt("Inserisci un numero tra 1 e 100"));
+while ( attempts.length < availableAttempts && lost == false) {
+  var userNumber = parseInt(prompt("Inserisci un numero tra 1 e " + maxAttempts));
   console.log(userNumber);
   var duplicateCheck = checkIfNumberAlreadyExist(userNumber, attempts);
   console.log(duplicateCheck);
 
   var gameCheck = checkIfNumberAlreadyExist(userNumber, randomPCArray);
   console.log(gameCheck);
-  
+
   if (gameCheck == true) {
     alert("Hai perso");
     lost = true;
   } else if (duplicateCheck == false) {
     attempts.push(userNumber);
+    score++;
   }
-  score++;
-  console.log(score);
+  console.log("Punteggio" + score);
 }
 alert("Il tuo punteggio è: " + score);
 console.log(attempts);
