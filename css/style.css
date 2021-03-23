@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* background: #0f1923; */
+  /* font-family: 'Press Start 2P', cursive; */
+  /* font-family: 'Special Elite', cursive; */
+  /* font-family: 'Jua', sans-serif; */
+  font-family: "Muli";
+}
+
+.container_before_play {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1200px;
+  height: 100vh;
+  margin: auto;
+}
+
+.container_after_play {
+  width: 1200px;
+  height: 100vh;
+  margin: auto;
+}
+
+.container_before_play #play {
+  cursor: pointer;
+}
+
+.container_after_play #play {
+  margin: auto;
+  padding: 50px 0;
+}
+
+.hard_level {
+  color: #E40017;
+}
+
+.medium_level {
+  color: #F0C929;
+}
+
+.easy_level {
+  color: #54E346;
+}
+
+.main_container_before_play {
+  display: none;
+}
+.main_container_after_play {
+  display: block;
+  width: 100%;
+}
+
+.to_appear {
+  display: block;
+}
+
+#play {
+  width: 400px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+/* #start_game {
+  color: sandybrown;
+  padding: 10px 30px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+} */
+
+/* #start_game:hover {
+  color: aquamarine;
+} */
+
+.hidden {
+  display: none;
+}

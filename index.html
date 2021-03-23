@@ -4,9 +4,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css">
-    <title></title>
+    <title>Campo minato</title>
   </head>
   <body>
+    
+    <div id="container" class="container_before_play">
+
+      <h1 id="play">CAMPO MINATO</h1>
+
+      <div id="main_container" class="main_container_before_play">
+        <h2>Hai davvero il coraggio di sfidare il computer?</h2>
+
+        <select id="level">
+          <option value="">Seleziona</option>
+          <option value="Facile">Facile</option>
+          <option value="Normale">Normale</option>
+          <option value="Difficile">Difficile</option>
+        </select>
+
+        <div class="start_game_button">
+          <a id="start_game" href="#">
+            <p>
+              <span class="bg"></span>
+              <span class="base"></span>
+              <span class="text">Gioca</span>
+            </p>
+          </a>
+        </div>
+        
+
+        <p class="hidden" id="level_sentence"></p>
+      </div>
+
+    </div>
+
+
+
     <script src="js/script.js" charset="utf-8"></script>
   </body>
 </html>

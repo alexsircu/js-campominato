@@ -8,13 +8,15 @@
 // Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha inserito un numero consentito.
 
 // FUNZIONI -----------------------------------------------
+//creo numero random tre un min e un massimo
 function randomFunction(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+//controllo se il numero esiste dentro l'array
 function checkIfNumberAlreadyExist(number, array) {
-  var result = false;
-  for (var i = 0; i < array.length; i++) {
+  let result = false;
+  for (let i = 0; i < array.length; i++) {
     if (number == array[i]) {
       result = true;
     }
@@ -23,57 +25,112 @@ function checkIfNumberAlreadyExist(number, array) {
 }
 // FUNZIONI -----------------------------------------------
 
-// Scelta difficoltà del gioco "BONUS"
-var maxAttempts;
-var level;
-level = parseInt(prompt("Scegli la difficoltà tra 0, 1 o 2"));
-switch (level) {
-  case 2:
-  maxAttempts = 50;
-    break;
-  case 1:
-  maxAttempts = 80;
-    break;
-  default:
-  maxAttempts = 100;
-}
-// generazione bombe
-var randomPCArray = [];
-while (randomPCArray.length < 16) {
-  var generatedNumberPC = randomFunction(1, maxAttempts);
-  // console.log(generatedNumberPC);
-  var duplicate = checkIfNumberAlreadyExist(generatedNumberPC, randomPCArray);
-  if (duplicate == false) {
-    randomPCArray.push(generatedNumberPC);
+// DICHIARAZIONE VARIABILI
+let start = document.getElementById("start_game");
+let level = document.getElementById("level");
+let levelSentence = document.getElementById("level_sentence");
+let play = document.getElementById("play");
+let container = document.getElementById("container");
+let mainContainer = document.getElementById("main_container");
+let maxAttempts;
+let randomPCArray = [];
+let availableAttempts = maxAttempts - 16;
+let attempts = [];
+let score = 0;
+let lost = false;
+
+console.log(level.value);
+
+//Al click appare il template della pagina
+play.addEventListener("click", function() {
+  container.classList.remove("container_before_play");
+  container.classList.add("container_after_play");
+
+  mainContainer.classList.remove("main_container_before_play");
+  mainContainer.classList.add("main_container_after_play");
+});
+
+//Al click parte il gioco 
+start.addEventListener("click", function() {
+  start.classList.add("hidden");
+  level.classList.add("hidden");
+  levelSentence.classList.remove("hidden");
+
+  // levelSelected.innerHTML = level.value;
+
+  //Seleziono il livello del gioco con la select
+  switch (level.value) {
+    case "Facile":
+      maxAttempts = 100;
+      levelSentence.innerHTML = "Ti piace vincere facile?";
+      levelSentence.classList.add("easy_level");
+      // document.getElementById("container").classList.add("easy_level");
+      // console.log(maxAttempts);
+      break;
+    case "Normale":
+      maxAttempts = 80;
+      levelSentence.innerHTML = "E prendilo qualche rischio ogni tanto!";
+      levelSentence.classList.add("medium_level");
+      // document.getElementById("container").classList.add("medium_level");
+      // console.log(maxAttempts);
+      break;
+    case "Difficile":
+      maxAttempts = 50;
+      levelSentence.innerHTML = "Ammetto che hai fegato!";
+      levelSentence.classList.add("hard_level");
+      // document.getElementById("container").classList.add("hard_level");
+      // console.log(maxAttempts);
+      break;
   }
-}
-console.log(randomPCArray);
-// fine generazione bombe
 
-// creazione gioco
-var availableAttempts = maxAttempts - 16;
-var attempts = [];
-var score = 0;
-// gioco
-var lost = false;
-while ( attempts.length < availableAttempts && lost == false) {
-  var userNumber = parseInt(prompt("Inserisci un numero tra 1 e " + maxAttempts));
-  console.log(userNumber);
-  var duplicateCheck = checkIfNumberAlreadyExist(userNumber, attempts);
-  console.log(duplicateCheck);
+  // level.classList.remove("hidden");
 
-  var gameCheck = checkIfNumberAlreadyExist(userNumber, randomPCArray);
-  console.log(gameCheck);
-
-  if (gameCheck == true) {
-    alert("Hai perso");
-    lost = true;
-  } else if (duplicateCheck == false) {
-    attempts.push(userNumber);
-    score++;
+  // Generazione bombe
+  while (randomPCArray.length < 16) {
+    let generatedNumberPC = randomFunction(1, maxAttempts);
+    // console.log(generatedNumberPC);
+    let duplicate = checkIfNumberAlreadyExist(generatedNumberPC, randomPCArray);
+    if (duplicate == false) {
+      randomPCArray.push(generatedNumberPC);
+    }
   }
-  console.log("Punteggio" + score);
-}
-alert("Il tuo punteggio è: " + score);
-console.log(attempts);
-// fine gioco
+  console.log(randomPCArray);
+  // Fine generazione bombe
+
+  // Creazione gioco
+  while ( attempts.length < availableAttempts && lost == false) {
+    let userNumber = parseInt(prompt("Inserisci un numero tra 1 e " + maxAttempts)); //modificare input numero
+    console.log(userNumber);
+    let duplicateCheck = checkIfNumberAlreadyExist(userNumber, attempts);
+    console.log(duplicateCheck);
+
+    let gameCheck = checkIfNumberAlreadyExist(userNumber, randomPCArray);
+    console.log(gameCheck);
+
+    if (gameCheck == true) {
+      alert("Hai perso"); // modificare alert
+      lost = true;
+    } else if (duplicateCheck == false) {
+      attempts.push(userNumber);
+      score++;
+    }
+    console.log("Punteggio" + score);
+  }
+  alert("Il tuo punteggio è: " + score);
+  console.log(attempts);
+  // Fine gioco
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
