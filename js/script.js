@@ -29,6 +29,7 @@ function checkIfNumberAlreadyExist(number, array) {
 let start = document.getElementById("start_game");
 let level = document.getElementById("level");
 let levelSentence = document.getElementById("level_sentence");
+let gameGrid = document.getElementById("game_grid");
 let play = document.getElementById("play");
 let container = document.getElementById("container");
 let mainContainer = document.getElementById("main_container");
@@ -116,10 +117,33 @@ start.addEventListener("click", function() {
     }
     console.log("Punteggio" + score);
   }
-  alert("Il tuo punteggio è: " + score);
-  console.log(attempts);
+  // alert("Il tuo punteggio è: " + score);
+  // console.log(attempts);
   // Fine gioco
+
+  for (let i = 0; i < maxAttempts; i++) {
+
+    const tableContainer = document.createElement('div'); //creo un nuovo tag nell'html
+    tableContainer.classList.add('square_style'); //aggiungo una classe al nuovo tag
+
+    const tableContent = document.createTextNode(maxAttempts); //creo del contenuto
+
+    tableContainer.appendChild(tableContent); //dentro il tag creato inserisco il nuovo contenuto creato
+
+    gameGrid.appendChild(tableContainer); //dentro il blocco che voglio (container della pagina) inserisco tutto il nuovo blocco
+  }
+  
+
+  
+
+
+  
+
+
 });
+
+
+ 
 
 
 
