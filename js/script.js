@@ -29,9 +29,9 @@ function checkIfNumberAlreadyExist(number, array) {
 let start = document.getElementById("start_game");
 let level = document.getElementById("level");
 let levelSentence = document.getElementById("level_sentence");
-let gameGrid = document.getElementById("game_grid");
 let play = document.getElementById("play");
 let container = document.getElementById("container");
+let gameGrid;
 let mainContainer = document.getElementById("main_container");
 let maxAttempts;
 let randomPCArray = [];
@@ -63,6 +63,11 @@ start.addEventListener("click", function() {
   switch (level.value) {
     case "Facile":
       maxAttempts = 100;
+
+      // creo il container della griglia di gioco
+      gameGrid = document.createElement('div');
+      gameGrid.classList.add('game_grid_500');
+
       levelSentence.innerHTML = "Ti piace vincere facile?";
       levelSentence.classList.add("easy_level");
       // document.getElementById("container").classList.add("easy_level");
@@ -70,6 +75,11 @@ start.addEventListener("click", function() {
       break;
     case "Normale":
       maxAttempts = 80;
+
+      // creo il container della griglia di gioco
+      gameGrid = document.createElement('div');
+      gameGrid.classList.add('game_grid_400');
+
       levelSentence.innerHTML = "E prendilo qualche rischio ogni tanto!";
       levelSentence.classList.add("medium_level");
       // document.getElementById("container").classList.add("medium_level");
@@ -77,12 +87,19 @@ start.addEventListener("click", function() {
       break;
     case "Difficile":
       maxAttempts = 50;
+
+      // creo il container della griglia di gioco
+      gameGrid = document.createElement('div');
+      gameGrid.classList.add('game_grid_250');
+
       levelSentence.innerHTML = "Ammetto che hai fegato!";
       levelSentence.classList.add("hard_level");
       // document.getElementById("container").classList.add("hard_level");
       // console.log(maxAttempts);
       break;
   }
+
+  container.appendChild(gameGrid);
 
   // level.classList.remove("hidden");
 
@@ -121,16 +138,18 @@ start.addEventListener("click", function() {
   // console.log(attempts);
   // Fine gioco
 
+  console.log(maxAttempts);
+
   for (let i = 0; i < maxAttempts; i++) {
 
-    const tableContainer = document.createElement('div'); //creo un nuovo tag nell'html
-    tableContainer.classList.add('square_style'); //aggiungo una classe al nuovo tag
-
-    const tableContent = document.createTextNode(maxAttempts); //creo del contenuto
-
-    tableContainer.appendChild(tableContent); //dentro il tag creato inserisco il nuovo contenuto creato
-
-    gameGrid.appendChild(tableContainer); //dentro il blocco che voglio (container della pagina) inserisco tutto il nuovo blocco
+    const tableSquare = document.createElement('div'); //creo un nuovo tag nell'html
+    tableSquare.classList.add('square_style'); //aggiungo una classe al nuovo tag
+    
+    const tableContent = document.createTextNode('im'); //creo del contenuto
+    
+    tableSquare.appendChild(tableContent); //dentro il tag creato inserisco il nuovo contenuto creato
+    
+    gameGrid.appendChild(tableSquare); //dentro il blocco che voglio (container della pagina) inserisco tutto il nuovo blocco
   }
   
 
