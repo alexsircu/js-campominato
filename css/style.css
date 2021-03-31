@@ -99,9 +99,7 @@ body {
   width: calc(60px - 2px);
   height: calc(60px - 2px);
   margin: 1px;
-  /* border: 1px solid; */
   background-color: white;
-  /* background-image: url('../img/bomb.png'); */
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -111,6 +109,9 @@ body {
   width: 58px;
 }
 
+.hidden {
+  
+}
 
 /* griglia di gioco */
 .game_grid {
