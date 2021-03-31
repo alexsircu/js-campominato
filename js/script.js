@@ -31,6 +31,7 @@ let level = document.getElementById("level");
 let levelSentence = document.getElementById("level_sentence");
 let play = document.getElementById("play");
 let container = document.getElementById("container");
+let gridContainer = document.getElementById("grid_container");
 let gameGrid;
 let mainContainer = document.getElementById("main_container");
 let maxAttempts;
@@ -66,6 +67,7 @@ start.addEventListener("click", function() {
 
       // creo il container della griglia di gioco
       gameGrid = document.createElement('div');
+      gameGrid.classList.add('game_grid');
       gameGrid.classList.add('game_grid_500');
 
       levelSentence.innerHTML = "Ti piace vincere facile?";
@@ -78,6 +80,7 @@ start.addEventListener("click", function() {
 
       // creo il container della griglia di gioco
       gameGrid = document.createElement('div');
+      gameGrid.classList.add('game_grid');
       gameGrid.classList.add('game_grid_400');
 
       levelSentence.innerHTML = "E prendilo qualche rischio ogni tanto!";
@@ -90,6 +93,7 @@ start.addEventListener("click", function() {
 
       // creo il container della griglia di gioco
       gameGrid = document.createElement('div');
+      gameGrid.classList.add('game_grid');
       gameGrid.classList.add('game_grid_250');
 
       levelSentence.innerHTML = "Ammetto che hai fegato!";
@@ -99,7 +103,7 @@ start.addEventListener("click", function() {
       break;
   }
 
-  container.appendChild(gameGrid);
+  gridContainer.appendChild(gameGrid);
 
   // level.classList.remove("hidden");
 
@@ -140,17 +144,35 @@ start.addEventListener("click", function() {
 
   console.log(maxAttempts);
 
-  for (let i = 0; i < maxAttempts; i++) {
+  for (let i = 1; i <= maxAttempts; i++) {
 
     const tableSquare = document.createElement('div'); //creo un nuovo tag nell'html
     tableSquare.classList.add('square_style'); //aggiungo una classe al nuovo tag
+
+    const tableContent = document.createTextNode(i); //creo il contenuto con dentro i numeri da 1 a maxAttempts
+    // tableContent.setAttribute("id", "number_inside_div");
+
+    // let newRoba = document.getElementById("number_inside_div");
+    // // tableContent.textContent[randomPCArray[2]];
+    // console.log(newRoba[randomPCArray[2]].textContent); 
     
-    const tableContent = document.createTextNode('im'); //creo del contenuto
     
     tableSquare.appendChild(tableContent); //dentro il tag creato inserisco il nuovo contenuto creato
     
     gameGrid.appendChild(tableSquare); //dentro il blocco che voglio (container della pagina) inserisco tutto il nuovo blocco
+
+    for (let j = 0; j < randomPCArray.length; j++) {
+      
+      if (i == randomPCArray[j]) {
+
+        const newImg = document.createElement('img'); //creo nuovo tag img
+        newImg.src = "img/bomb.png"; //aggiungo attributo src al tag creato  
+        tableSquare.replaceChild(newImg, tableContent); //inserisco al posto del vecchio contenuto quello nuovo
+
+      } 
+    }  
   }
+  
   
 
   
