@@ -139,18 +139,19 @@ start.addEventListener("click", function() {
 
   console.log(maxAttempts);
 
-  for (let i = 1; i <= maxAttempts; i++) {
+  for (let i = 1; i <= maxAttempts && lost == false; i++) {
 
     const tableSquare = document.createElement('div'); //creo un nuovo tag nell'html
-    // tableSquare.setAttribute('id', 'click');
     tableSquare.classList.add('square_style'); //aggiungo una classe al nuovo tag
     const tableContentImg = document.createElement('img'); //creo il contenuto con dentro i numeri da 1 a maxAttempts
-    tableContentImg.src = "https://lh3.googleusercontent.com/proxy/6MoLoR7REe2abidUoCZTFCnZwnZAJU7ho2rcfvWPKEhU94GFmlambB5ceKRGk-Qwq_wyiGa8BwwalZwVDZD5YZ-aaVs";
+    tableContentImg.src = "img/question.png";
     tableSquare.appendChild(tableContentImg); //dentro il tag creato inserisco il nuovo contenuto creato
     gameGrid.appendChild(tableSquare); //dentro il blocco che voglio (container della pagina) inserisco tutto il nuovo blocco
 
     tableSquare.addEventListener("click", function () {
 
+      tableSquare.classList.add('clicked');
+      
       const tableFlippedContent = document.createTextNode(i);
       tableSquare.replaceChild(tableFlippedContent, tableContentImg);
 
@@ -159,15 +160,40 @@ start.addEventListener("click", function() {
         if (i == randomPCArray[j]) {
   
           const newImg = document.createElement('img'); //creo nuovo tag img
+          newImg.classList.add('clicked');
           newImg.src = "img/bomb.png"; //aggiungo attributo src al tag creato  
           tableSquare.replaceChild(newImg, tableFlippedContent); //inserisco al posto del vecchio contenuto quello nuovo
-  
-        } 
+          
+        }
       }
 
-    });
+      let duplicateCheck = checkIfNumberAlreadyExist(i, attempts);
+      let gameCheck = checkIfNumberAlreadyExist(i, randomPCArray);
 
-    tableSquare.classList.add('hidden');
+      if (gameCheck == true) {
+
+        console.log("hai perso");
+        lost = true;
+
+        // setInterval( function() {
+        //   const win = document.createElement('p');
+        // const winContent = document.createTextNode("Il tuo punteggio è: " + score);
+        // win.appendChild(winContent);
+        // mainContainer.replaceChild(win, gridContainer);
+        // }, 1000, {once: true});
+
+        // da aggiustare perchè me lo fa di continuo
+
+        
+
+
+      } else if (duplicateCheck == false) {
+        attempts.push(i);
+        console.log(attempts);
+        score++;
+      }
+
+    }, {once: true});
     
   }  
 });

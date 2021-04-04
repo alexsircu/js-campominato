@@ -99,19 +99,29 @@ body {
   width: calc(60px - 2px);
   height: calc(60px - 2px);
   margin: 1px;
+  font-size: 15px;
+  cursor: pointer;
+  animation: fadeIn 300ms ease-in-out;
+  transition: all linear 0.1s;
   background-color: white;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
 }
 
-.square_style img {
-  width: 58px;
+.square_style.clicked {
+  font-size: 30px;
 }
 
-.hidden {
-  
+@keyframes fadeIn {
+  from { opacity: 0; }
 }
+
+.square_style img {
+  width: 100%;
+}
+
+
 
 /* griglia di gioco */
 .game_grid {
