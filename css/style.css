@@ -7,89 +7,91 @@
 }
 
 body {
-  /* background: #0f1923; */
-  /* font-family: 'Press Start 2P', cursive; */
-  /* font-family: 'Special Elite', cursive; */
-  /* font-family: 'Jua', sans-serif; */
   font-family: "Muli";
+  background-image: url("../img/background.png");
 }
 
-.container_before_play {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#main_container {
+  text-align: center;
+}
+
+.container_class {
   width: 1200px;
   height: 100vh;
   margin: auto;
 }
 
-.container_after_play {
-  width: 1200px;
-  height: 100vh;
-  margin: auto;
-}
-
-.container_before_play #play {
-  cursor: pointer;
-}
-
-.container_after_play #play {
+.container_class #title {
   margin: auto;
   padding: 50px 0;
 }
 
-.hard_level {
-  color: #E40017;
+#title {
+  width: 600px;
+  margin: 20px 0;
+  font-size: 60px;
+  text-align: center;
+  color: #C91051;
 }
 
-.medium_level {
-  color: #F0C929;
-}
-
-.easy_level {
-  color: #54E346;
-}
-
-.main_container_before_play {
-  display: none;
-}
-.main_container_after_play {
+/* contenuto della pagina */
+.main_container_class {
   display: block;
   width: 100%;
 }
 
-.to_appear {
-  display: block;
+#level_title {
+  padding: 20px 0;
 }
 
-#play {
-  width: 400px;
-  margin: 20px 0;
-  text-align: center;
+#level {
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: #C91051;
+  border: 1px solid #C91051;
 }
-
-/* #start_game {
-  color: sandybrown;
-  padding: 10px 30px;
-  font-size: 20px;
-  border-radius: 5px;
-  border: 0;
+#level:focus {
   outline: none;
-  cursor: pointer;
-} */
-
-/* #start_game:hover {
-  color: aquamarine;
-} */
-
-.hidden {
-  display: none;
 }
 
+.pointer_event_none {
+  pointer-events: none;
+}
+
+.start_game {
+  text-decoration: none;
+  color: #C91051;
+  font-size: 20px;
+  padding: 0 30px;
+  border-radius: 5px;
+  border: 1px solid #C91051;
+  outline: none;
+  cursor: pointer;   
+}
+
+/* contenitore griglia di gioco */
 #grid_container {
   display: flex;
   justify-content: center;
   padding-top: 50px;
+}
+
+.game_grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 602px;
+  border: 1px solid #C91051;
+  margin: auto;
+  background-color: #C91051;
+}
+.game_grid_500 {
+  height: 602px;
+}
+.game_grid_400 {
+  height: 482px;
+}
+.game_grid_250 {
+  height: 302px;
 }
 
 .square_style {
@@ -101,7 +103,7 @@ body {
   margin: 1px;
   font-size: 15px;
   cursor: pointer;
-  animation: fadeIn 300ms ease-in-out;
+  animation: fadeIn 600ms ease-in-out;
   transition: all linear 0.1s;
   background-color: white;
   background-repeat: no-repeat;
@@ -109,36 +111,32 @@ body {
   background-size: contain;
 }
 
+.square_style img {
+  width: 100%;
+}
+
 .square_style.clicked {
   font-size: 30px;
+}
+
+.fade_out {
+  animation: fadeOut 1000ms ease-in-out;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; }
 }
 
-.square_style img {
-  width: 100%;
+@keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity: 0;}
 }
 
-
-
-/* griglia di gioco */
-.game_grid {
-  display: flex;
-  flex-wrap: wrap;
-  width: 602px;
-  border: 1px solid lightcoral;
-  margin: auto;
-  background-color: lightcoral;
+.score_text {
+  font-size: 80px;
+  margin-top: 150px;
 }
 
-.game_grid_500 {
-  height: 602px;
-}
-.game_grid_400 {
-  height: 482px;
-}
-.game_grid_250 {
-  height: 302px;
+.retry_game_button {
+  margin-top: 50px;
 }

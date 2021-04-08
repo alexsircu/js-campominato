@@ -25,11 +25,10 @@ function checkIfNumberAlreadyExist(number, array) {
 }
 // FUNZIONI -----------------------------------------------
 
-// DICHIARAZIONE VARIABILI
+// Dichiarazione variabili
 let start = document.getElementById("start_game");
 let level = document.getElementById("level");
-let levelSentence = document.getElementById("level_sentence");
-let play = document.getElementById("play");
+let levelTitle = document.getElementById("level_title");
 let container = document.getElementById("container");
 let gridContainer = document.getElementById("grid_container");
 let gameGrid;
@@ -41,24 +40,11 @@ let attempts = [];
 let score = 0;
 let lost = false;
 
-console.log(level.value);
-
-//Al click appare il template della pagina
-play.addEventListener("click", function() {
-  container.classList.remove("container_before_play");
-  container.classList.add("container_after_play");
-
-  mainContainer.classList.remove("main_container_before_play");
-  mainContainer.classList.add("main_container_after_play");
-});
-
 //Al click parte il gioco 
 start.addEventListener("click", function() {
-  start.classList.add("hidden");
-  level.classList.add("hidden");
-  levelSentence.classList.remove("hidden");
 
-  // levelSelected.innerHTML = level.value;
+  level.classList.add("pointer_event_none");
+  start.classList.add("pointer_event_none");
 
   //Seleziono il livello del gioco con la select
   switch (level.value) {
@@ -69,23 +55,17 @@ start.addEventListener("click", function() {
       gameGrid = document.createElement('div');
       gameGrid.classList.add('game_grid');
       gameGrid.classList.add('game_grid_500');
-
-      levelSentence.innerHTML = "Ti piace vincere facile?";
-      levelSentence.classList.add("easy_level");
-  
       break;
+
     case "Normale":
       maxAttempts = 80;
 
       // creo il container della griglia di gioco
       gameGrid = document.createElement('div');
       gameGrid.classList.add('game_grid');
-      gameGrid.classList.add('game_grid_400');
-
-      levelSentence.innerHTML = "E prendilo qualche rischio ogni tanto!";
-      levelSentence.classList.add("medium_level");
-      
+      gameGrid.classList.add('game_grid_400');      
       break;
+
     case "Difficile":
       maxAttempts = 50;
 
@@ -93,52 +73,34 @@ start.addEventListener("click", function() {
       gameGrid = document.createElement('div');
       gameGrid.classList.add('game_grid');
       gameGrid.classList.add('game_grid_250');
-
-      levelSentence.innerHTML = "Ammetto che hai fegato!";
-      levelSentence.classList.add("hard_level");
-      
       break;
+
+    default:
+      maxAttempts = 100;
+
+      // creo il container della griglia di gioco
+      gameGrid = document.createElement('div');
+      gameGrid.classList.add('game_grid');
+      gameGrid.classList.add('game_grid_500');
+      break;
+
   }
 
   gridContainer.appendChild(gameGrid);
 
   // Generazione bombe
   while (randomPCArray.length < 16) {
+
     let generatedNumberPC = randomFunction(1, maxAttempts);
-    // console.log(generatedNumberPC);
     let duplicate = checkIfNumberAlreadyExist(generatedNumberPC, randomPCArray);
     if (duplicate == false) {
       randomPCArray.push(generatedNumberPC);
     }
+
   }
   console.log(randomPCArray);
-  // Fine generazione bombe
 
-  // Creazione gioco
-  while ( attempts.length < availableAttempts && lost == false) {
-    let userNumber = parseInt(prompt("Inserisci un numero tra 1 e " + maxAttempts)); //modificare input numero
-    console.log(userNumber);
-    let duplicateCheck = checkIfNumberAlreadyExist(userNumber, attempts);
-    console.log(duplicateCheck);
-
-    let gameCheck = checkIfNumberAlreadyExist(userNumber, randomPCArray);
-    console.log(gameCheck);
-
-    if (gameCheck == true) {
-      alert("Hai perso"); // modificare alert
-      lost = true;
-    } else if (duplicateCheck == false) {
-      attempts.push(userNumber);
-      score++;
-    }
-    console.log("Punteggio" + score);
-  }
-  // alert("Il tuo punteggio è: " + score);
-  // console.log(attempts);
-  // Fine gioco
-
-  console.log(maxAttempts);
-
+  // Gioco
   for (let i = 1; i <= maxAttempts && lost == false; i++) {
 
     const tableSquare = document.createElement('div'); //creo un nuovo tag nell'html
@@ -148,6 +110,7 @@ start.addEventListener("click", function() {
     tableSquare.appendChild(tableContentImg); //dentro il tag creato inserisco il nuovo contenuto creato
     gameGrid.appendChild(tableSquare); //dentro il blocco che voglio (container della pagina) inserisco tutto il nuovo blocco
 
+    // Al click su un quadrato della griglia si attiva la funzione
     tableSquare.addEventListener("click", function () {
 
       tableSquare.classList.add('clicked');
@@ -155,6 +118,7 @@ start.addEventListener("click", function() {
       const tableFlippedContent = document.createTextNode(i);
       tableSquare.replaceChild(tableFlippedContent, tableContentImg);
 
+      // Rileva se il quadrato è una bomba
       for (let j = 0; j < randomPCArray.length; j++) {
       
         if (i == randomPCArray[j]) {
@@ -165,27 +129,45 @@ start.addEventListener("click", function() {
           tableSquare.replaceChild(newImg, tableFlippedContent); //inserisco al posto del vecchio contenuto quello nuovo
           
         }
+
       }
 
       let duplicateCheck = checkIfNumberAlreadyExist(i, attempts);
       let gameCheck = checkIfNumberAlreadyExist(i, randomPCArray);
 
+      // Verifica se il quadrato selezionato è un numero valido o una bomba, o aumenta il punteggio o finisce la partita
       if (gameCheck == true) {
 
-        console.log("hai perso");
         lost = true;
+        gameGrid.classList.add("fade_out");
 
-        // setInterval( function() {
-        //   const win = document.createElement('p');
-        // const winContent = document.createTextNode("Il tuo punteggio è: " + score);
-        // win.appendChild(winContent);
-        // mainContainer.replaceChild(win, gridContainer);
-        // }, 1000, {once: true});
+        setTimeout( function() {
+          const win = document.createElement('p');
+          win.classList.add("score_text");
+          const winContent = document.createTextNode("Punteggio: " + score);
+          win.appendChild(winContent);
+          mainContainer.replaceChild(win, gridContainer);
 
-        // da aggiustare perchè me lo fa di continuo
+          // Creo il tasto gioca di nuovo
+          const retryButtonContainer = document.createElement('div');
+          retryButtonContainer.classList.add("retry_game_button");
+          const retryButton = document.createElement('a');
+          // retryButton.id = "retry_game";
+          retryButton.classList.add("start_game");
 
-        
+          const retryContent = document.createTextNode("Gioca di nuovo");
 
+          mainContainer.appendChild(retryButtonContainer);
+          retryButtonContainer.appendChild(retryButton);
+          retryButton.appendChild(retryContent);
+
+          retryButton.addEventListener("click", function() {
+
+            window.location.reload(true);
+
+          });
+
+        }, 950);
 
       } else if (duplicateCheck == false) {
         attempts.push(i);
@@ -196,7 +178,9 @@ start.addEventListener("click", function() {
     }, {once: true});
     
   }  
-});
+  // Fine gioco
+
+}, {once: true});
 
 
  

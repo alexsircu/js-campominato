@@ -3,18 +3,17 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.css" integrity="sha512-3icgkoIO5qm2D4bGSUkPqeQ96LS8+ukJC7Eqhl1H5B2OJMEnFqLmNDxXVmtV/eq5M65tTDkUYS/Q0P4gvZv+yA==" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/style.css">
     <title>Campo minato</title>
   </head>
   <body>
-    
-    <div id="container" class="container_before_play">
+    <div id="container" class="container_class">
+      <h1 id="title">CAMP<i class="fas fa-bomb"></i> MINAT<i class="fas fa-bomb"></i></i></h1>
+      <div id="main_container" class="main_container_class">
+        <h2 id="level_title">Scegli il livello di difficoltà</h2>
 
-      <h1 id="play">CAMPO MINATO</h1>
-
-      <div id="main_container" class="main_container_before_play">
-        <h2>Hai davvero il coraggio di sfidare il computer?</h2>
-
+        <!-- select che seleziona il livello -->
         <select id="level">
           <option value="">Seleziona</option>
           <option value="Facile">Facile</option>
@@ -22,26 +21,15 @@
           <option value="Difficile">Difficile</option>
         </select>
 
+        <!-- tasto gioca che crea la griglia e il gioco -->
         <div class="start_game_button">
-          <a id="start_game" href="#">
-            <p>
-              <span class="bg"></span>
-              <span class="base"></span>
-              <span class="text">Gioca</span>
-            </p>
-          </a>
+          <a id="start_game" class="start_game" href="#">Gioca</a>
         </div>
-        
-        <p class="hidden" id="level_sentence"></p>
 
+        <!-- griglia di gioco -->
         <div id="grid_container"></div>
-
       </div>
-
     </div>
-
-
-
     <script src="js/script.js" charset="utf-8"></script>
   </body>
 </html>
